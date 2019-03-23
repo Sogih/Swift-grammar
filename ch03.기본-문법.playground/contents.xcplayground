@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='6.0' target-platform='ios' display-mode='rendered' executeOnSourceChanges='false'>
-    <pages>
-        <page name='04.연산자'/>
-        <page name='01.스위프트-기초-문법'/>
-        <page name='02.변수와-상수'/>
-        <page name='03.자료형'/>
-    </pages>
-</playground>
