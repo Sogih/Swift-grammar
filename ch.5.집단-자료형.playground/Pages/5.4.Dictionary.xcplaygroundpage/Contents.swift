@@ -25,6 +25,7 @@ Dictionary<String, Int>()
         var capital_1 = Dictionary<String, String>()
         var capital_2 = [String : String]()
 
+
 //선언된 dictionary의 초기화
 var capital_3 : [String:String] = ["KOR":"Seoul"]
 capital_3 = Dictionary<String, String>()
@@ -50,28 +51,40 @@ if newCapital.isEmpty {
 }
 
 //메소드를 사용하여 동적으로 value 할당: updateValue(_:forkey:)
+newCapital.updateValue("Seoul", forKey: "KR") //새로운 키 입력
+newCapital.updateValue("London", forKey: "EN") //새로운 키 입력
+newCapital.updateValue("Sapporo", forKey: "JP") //기존의 키 수정
     //기존에 저장된 키가 있으면 연결된 값을 수정 - 기존의 value를 return
     //새로운 키가 입력되면 아이템을 추가 - nil을 retrun
-newCapital.updateValue("Seoul", forkey: "KR") //새로운 키 입력
-newCapital.updateValue("London", forkey: "EN")
 print(newCapital)
 
+//💡dictionary에 저장된 item을 제거하는 방법
+newCapital.updateValue("Ottawa", forKey: "CA")
+newCapital.updateValue("Beijing", forKey: "CN")
+    //1️⃣키에 연결된 값에 직접 nil 할당
+        newCapital["CN"] = nil
+    //2️⃣using method: removeValue(forKey:)
+        newCapital.removeValue(forKey: "CA")
+        //삭제된 item의 value를 반환
+print(newCapital)
 
+//removeValue 반환값의 활용
+if let removedValue = newCapital.removeValue(forKey: "JP") {
+    print("The value removed is \(removedValue)")
+} else {
+    print("Nothing was removed")
+}
+//:---
+//dictionary의 순회 탐색 #1.
+for row in newCapital {
+    let (key, value) = row
+    // dictionary에서 꺼낸 key-value 한 쌍이 담긴 row 상수를 tuple로 받는다
+    print("Current data is \(key) : \(value)")
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//dictionary의 순회탐색 #2. 단순화, 직관화
+for (key, value) in newCapital {
+    print("Current data is \(key) : \(value)")
+}   //dictionary는 고유 key에 대한 hash 처리 값을 기준으로 내부 정렬하기 때문에
+    //입력한 순서대로 출력되지 않는다
 //: [Next](@next)
