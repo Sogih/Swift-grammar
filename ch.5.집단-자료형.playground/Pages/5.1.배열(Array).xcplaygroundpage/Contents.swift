@@ -66,7 +66,37 @@ if list.isEmpty {
     * `insert(_:at:)`: 배열의 원하는 위치에 직접 추가
     * `append(contentsOf:)` 배열의 맨 뒤에 배열을 추가 (여러 개의 아이템 추가 가능)
  */
+//example
+var cities_6 = [String]() // 선언+초기화
+cities_6.count
+cities_6.append("Seoul")
+cities_6.append("New York")
+cities_6.insert("Tokyo", at: 1)
+cities_6.append(contentsOf: ["Dubai", "Sydney"])
+cities_6[2] = "Madrid" //입력된 배열값 변경
+    //배열의 인덱스를 이용하여 직접 아이템에 접근하는 방식으로
+    //기존의 있는 값을 수정할 수는 있지만, 값을 추가할 수는 없다
+    //즉, 이미 인덱스가 확보되어 있어야 한다.
 
+//배열을 생성하는 방법 중에서 초기화할 때 배열의 크기를 지정할 수 있다
+var cities_7 = Array(repeating: "None", count: 3)
+    //array구조체는 [] 기호로 대체할 수 있으므로 다음과 같이 바꿔도 된다.
+    //var cities_7 = [String](repeating: "None", count: 3)
+    //배열의 인덱스가 개수만큼 미리 정의되고, 기본값이 각각 추가된 상태로 배열이 만들어진다
+print(cities_7)
+//:---
+//범위 연산자를 이용하여 배열의 인덱스를 참조
+var alphabet = ["a", "b", "c", "d", "e"]
 
+alphabet[0...2]
+alphabet[2...3]
+
+//범위 연산자를 배열 아이템의 수정에 적용
+ //1.범위 연산자로 읽어 들인 배열의 크기보다 더 큰 아이템을 할당하는 경우
+  alphabet[1...2] = ["1", "2", "3"] //index1,2의 아이템을 삭제하고 3개의 아이템을 추가
+  alphabet //배열의 크기가 늘어났다
+ //2.범위 연산자로 읽어 들인 배열의 크기보다 더 작은 아이템을 할당하는 경우
+  alphabet[2...4] = ["A"] //index1,2의 아이템을 삭제하고 1개의 아이템을 추가
+  alphabet //배열의 크기가 줄어들었다
 
 //: [Next](@next)

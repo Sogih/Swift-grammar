@@ -2,6 +2,8 @@
 <playground version='6.0' target-platform='ios' display-mode='rendered' executeOnSourceChanges='false'>
     <pages>
         <page name='5.0.'/>
-        <page name='5.1.배열'/>
+        <page name='5.1.배열(Array)'/>
+        <page name='5.2.집합(Set)'/>
+        <page name='5.3.Tuple'/>
     </pages>
 </playground>
