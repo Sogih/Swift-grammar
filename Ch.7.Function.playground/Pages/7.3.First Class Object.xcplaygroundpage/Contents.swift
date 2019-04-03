@@ -80,5 +80,129 @@ let fn: (Int) -> String = boo
         //함수타입: (Int, String) -> (String, Int)
 
     //인자값이 없는 함수의 함수 타입
+    func foo_3() -> String {
+        return "Empty Values"
+    }   // 함수타입 () -> String
 
+    //반환값이 없는 함수의 함수 타입
+    func foo_3(base: Int) {
+        print("param = \(base)")
+    }   // 함수타입 (Int) -> () or (Int) -> Void
+
+    //인자값, 반환값 모두 없는 함수의 함수 타입
+    func too() {
+        print("Empty values")
+    }   // 함수타입 () -> () or () -> Void
+            // void는 반환값에만 사용 가능
+//:---
+//feature of first-class function - 2️⃣함수의 반환 타입으로 함수를 사용할 수 있음
+    //ㄴ일급 객체 함수는 클래스, 구조체, 함수 자체를 반환할 수도 있음
+func desc() -> String {
+    return "this is desc()"
+}
+
+func pass() -> () -> String {
+    return desc
+}   // desc 함수 자체를 반환
+    // pass 함수의 반환 타입: () -> String
+    // () -> String: 함수타입으로 표현한 desc 함수
+    // 첫번째 '->' 기준으로 왼쪽이 pass의 인자 타입, 오른쪽이 반환 타입
+    // 두번째 '->' 기준으로 왼쪽이 desc의 인자 타입, 오른쪽이 반환 타입
+
+let p = pass()
+    //pass 함수의 실행 결과값 할당
+    //pass 함수의 반환값은 desc함수
+    //<=> p에 desc 함수 할당
+desc()
+p()
+
+//ex
+func plus(a: Int, b: Int) -> Int {
+    return a + b
+}
+
+func minus(a: Int, b: Int) -> Int {
+    return a - b
+}
+
+func times(a: Int, b: Int) -> Int {
+    return a * b
+}
+
+func divide(a: Int, b: Int) -> Int {
+    guard b != 0 else {
+        return 0
+    }
+    return a / b
+}
+
+func calc(_ operand: String) -> (Int, Int) -> Int {
+    //외부 매개변수 _: 함수 호출 시 인자 레이블 생략 가능
+    switch operand {
+    case "+" :
+        return plus
+    case "-" :
+        return minus
+    case "*" :
+        return times
+    case "/" :
+        return divide
+    default :
+        return plus
+    }
+}
+
+let c = calc("+")
+c(3,4)
+    //<=> calc("+")(3,4)
+
+let c2 = calc("-")
+c2(3,4)
+
+let c3 = calc("*")
+c3(3,4)
+
+let c4 = calc("/")
+c4(3,4)
+//:---
+//feature of first-class function - 3️⃣함수의 인자값으로 함수를 사용할 수 있음
+func incr(param: Int) -> Int {
+    return param + 1
+}   // 인자값으로 사용될 함수
+
+func broker(base: Int, function fn: (Int) -> Int) -> Int {
+    return fn(base)
+}   // 두번째 매개변수는 인자로 "인자값으로 Int를 받고 반환값으로 Int를 주는 함수"를 받는다
+    // 타입만 일치한다면 인자로 받는 함수는 어떤 함수라도 가능하다
+    // 이처럼 중개 역할을 하는 함수를 broker(브로커)라고 한다
+
+broker(base: 3, function: incr)
+
+// call back function
+    //ㄴ특정 구문의 실행이 끝나면 시스템이 호출하도록 처리된 함수
+func successThrough() {
+    print("Operation processing succeeded")
+}
+
+func failThrough() {
+    print("Operation processing failed")
+}
+
+func divide_2(base: Int, success sCallBack: () -> Void, fail fCallBack: () -> Void) -> Int {
+    //sCallback, fcCallBack: '() -> void' 함수 타입을 받는 매개변수
+    guard base != 0 else {
+        fCallBack()
+        //<=> fCallBack 매개변수에 대입된 함수를 실행
+        return 0
+    }   // base가 0이면 fCallBack() 실행 -> 0 반환 -> 종료
+    
+    defer {
+        sCallBack()
+        //<=> sCallBack 매개변수에 대입된 함수를 실행
+    }
+    return 100 / base
+}
+
+divide_2(base: 30, success: successThrough, fail: failThrough)
+    // 100을 30으로 나누고 정수 형태로 반환
 
