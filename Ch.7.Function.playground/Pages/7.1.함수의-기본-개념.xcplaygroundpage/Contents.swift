@@ -57,7 +57,74 @@ func hello(name: String?) {
     //ex.#3
     printHelloWithName(name: "Gihyeon")
         //인자 레이블(매개변수명)을 빼먹지 않도록 주의하자
+//:---
+//: * 함수는 반드시 하나의 값만을 반환해야 한다
+//: * 여러 개의 값을 반환해야 한다면, 이 값들을 집단 자료형에 담아 반환해야 한다
+// 튜플을 반환하는 함수에 대한 선언
+func getUserInfo() -> (Int, String, Character) {
+    let height = 175
+    let name = "Gihyeon"
+    let gender: Character = "M"
+    
+    return (height, name, gender)
+}
 
+var uInfo = getUserInfo() // 함수 호출
+uInfo.0
+uInfo.1
+uInfo.2
+var (a, b, c) = getUserInfo() // 튜플 요소 각각을 변수로 직접 받기
+a
+b
+c
+var (height, _, name) = getUserInfo() // 필요 없는 튜플 항목에 대해 변수 할당 받지 않기
+height
+name
 
+// 실행 결과로 반환되는 튜플의 각 아이템을 함수 정의 구문을 통해 변수에 미리 할당
+func getUserInfo_2() -> (h: Int, g: Character, n: String) {
+    let gender: Character = "M"
+    let height = 175
+    let name = "Gihyeon"
+    
+    return(height, gender, name)
+}
+var result = getUserInfo_2()
+result.h
+result.g
+result.n
 
-//: [Next](@next)
+// 타입 알리어스
+    // ㄴ특정 튜플 타입이 여러 곳에서 사용될 경우
+    // ㄴ이름이 길거나 사용하기 복잡한 타입 표현을 새로운 타입명으로 정의해주는 문법
+typealias infoResult = (Int, Character, String)
+
+func getUserInfo_3() -> infoResult {
+    let gender: Character = "M"
+    let height = 175
+    let name = "Gihyeon"
+    
+    return (height, gender, name)
+}
+
+let info = getUserInfo_3()
+info.0
+info.1
+info.2
+
+//type alias를 이용하여 축약 표현을 만들 때 변수가 바인딩된 튜플을 정의
+typealias infoResult_2 = (h: Int, g: Character, n: String)
+
+func getUserInfo_4() -> infoResult_2 {
+    let gender: Character = "M"
+    let height = 175
+    let name = "Gihyeon"
+    
+    return (height, gender, name)
+}
+
+let info_2 = getUserInfo_4()
+info_2.0
+info_2.1
+info_2.2
+
