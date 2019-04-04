@@ -179,7 +179,6 @@ func broker(base: Int, function fn: (Int) -> Int) -> Int {
 broker(base: 3, function: incr)
 
 // call back function
-    //ㄴ특정 구문의 실행이 끝나면 시스템이 호출하도록 처리된 함수
 func successThrough() {
     print("Operation processing succeeded")
 }
@@ -190,19 +189,106 @@ func failThrough() {
 
 func divide_2(base: Int, success sCallBack: () -> Void, fail fCallBack: () -> Void) -> Int {
     //sCallback, fcCallBack: '() -> void' 함수 타입을 받는 매개변수
+    //success, fail: 외부 매개변수
+    //함수를 인자로 넘기는 목적: 함수 내부의 코드를 건드리지 않고 외부에서 실행 흐름을 추가할 수 있음
     guard base != 0 else {
         fCallBack()
-        //<=> fCallBack 매개변수에 대입된 함수를 실행
         return 0
-    }   // base가 0이면 fCallBack() 실행 -> 0 반환 -> 종료
+    }   // base가 0이면 매개변수 fCallBack에 대입된 함수를 실행 -> 0 반환 -> 종료
     
     defer {
         sCallBack()
-        //<=> sCallBack 매개변수에 대입된 함수를 실행
-    }
+    }   // defer 블록
+            // 1. 작성된 위치와 순서에 상관없이 함수가 종료되기 직전에 실행된다
+            // 2. defer블록을 읽기 전에 함수의 실행이 종료될 경우 defer 블록은 실행되지 않는다
+            // 3. 하나의 함수나 메소드 내에서 defer 블록을 여러번 사용할 수 있다. 이때에는 가장 마지막에 작성된 defer 블록부터 역순으로 실행된다
+            // 4. defer 블록을 중첩해서 사용하는 경우 -> 실행 순서는 바깥에서 안쪽으로
     return 100 / base
+        // base가 0이 아니면 매개변수 sCallBack에 대입된 함수를 실행 -> 100 / base 반환 -> 종료
 }
 
 divide_2(base: 30, success: successThrough, fail: failThrough)
-    // 100을 30으로 나누고 정수 형태로 반환
+
+divide_2(base: 30,
+    success: {
+        () -> Void in
+        print("Operation processing succeeded")
+    },
+    fail: {
+        () -> Void in
+        print("Operation processing failed")
+    }
+)   // 익명함수(클로저)를 사용하여 함수 호출
+//:---
+/*:
+ * __Nested Function__ (중첩 함수)
+    * __Outer Function__ (외부 함수)
+        * 프로그램이 실행될 때 생성되고 종료될 때 소멸 (외부 함수의 life cycle)
+    * __Inner Function__ (내부 함수)
+        * 외부함수가 실행될 때 생성되고, 종료될 때 소멸 (내부 함수의 life cycle)
+        * 내부 함수의 수에는 제한이 없다
+        * 내부 함수의 은닉성: 외부 함수를 거치지 않으면 접근 불가 <=> 외부 코드로부터 차단
+ */
+// example of nested func
+func outer(base: Int) -> String {
+    // outer func
+    func inner(inc: Int) -> String {
+        // inner func
+        // 오직 outer 함수 내부에서만 참조 가능 <=> 외부로부터 은닉되어 있음
+        return "return \(inc)"
+    }
+    let result = inner(inc: base + 1)
+    return result
+}
+outer(base: 3)
+
+// example2 of nested func - 외부 함수가 내부 함수를 반환하는 경우
+func outer_2(param: Int) -> (Int) -> String {
+    
+    func inner_2(inc: Int) -> String {
+        return "return \(inc)"
+    }
+    
+    return inner_2
+}
+
+let fn3 = outer_2(param: 3)
+    // 상수 fn3에 대한 할당값이 내부 함수 자체인 inner_2 이다
+    // outer가 종료되더라도 inner의 생명이 유지됨
+let fn4 = fn3(30)
+
+// exapmle3 of nested func - 내부함수에 외부 함수의 local 변수가 참조되는 경우
+func basic(param: Int) -> (Int) -> Int {
+    
+    let value = param + 20
+    
+    func append(add: Int) -> Int {
+
+        return value + add
+        // append: Int를 인자값으로 받고 외부 함수 basic이 받은 인자값+20을 한 것에 자신이 받은 인자값을 더한 Int를 반환하는 함수
+    }
+    
+    return append
+    // basic: Int를 인자값으로 받고 "인자 타입 Int, 반환 타입 Int인 함수(append)"를 반환하는 함수
+}
+
+let result = basic(param: 10)
+    //basic 실행 -> value(local var of basic) 참조 -> append 실행 -> value 참조 -> append 종료 -> append 반환 -> append 종료 -> basic 종료 (-> append 참조되어 생명 유지)
+result(10)
+    //append 실행 -> value 참조 -> append 종료
+
+    //basic이 종료된 이후에도 value가 참조되었다 어떻게 된 것일까?
+        //append 종료 전에 append 함수는 스스로 closure를 만들어서 result에 할당했음
+            //closure:
+                //1. 외부함수가 내부함수를 반환하고, 내부함수가 외부함수의 지역변수(상수)를 참조할 때 만들어짐
+                //2. 내부함수와 '내부함수의 context(주변환경)'을 포함하는 객체임
+                    //내부함수의 context: 내부함수에서 참조하는 모든 외부 변수(상수)의 값, 내부함수에서 참조하는 다른 객체의 값 ... (객체 자체가 아니라 그 값)
+            //result에 저장된 클로져 (객체 자체가 아니라 그 값을 저장한 것이므로 30이라는 숫자가 노온것이다)
+                //func append(add: Int) -> Int {
+                //    return 30 + add
+                //}
+            //클로져를 만든 이유?
+                //소멸될 외부함수의 지역변수(상수)가 이후에 참조될 것을 예상하고 미리 그 값을 꼼쳐둔거라고 보자
+                //이것을 값이 capture되었다고 표현한다
+        //따라서 line 278에서 'value 참조'라고 되어있는 것은 사실 append 실행 -> (어 value 소멸됐는데 참조해야 돼자나? 어떡하지? 그럴줄 알고 closure 만들어놨지) -> closure 실행 -> 반환, 종료
 
