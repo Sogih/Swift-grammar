@@ -156,4 +156,123 @@ divide(base: 100,
         //        print("fail")
         //}
 //:---
-//7.4.4
+/*:
+ * __@escaping__
+    * 인자값으로 전달된 클로저를 저장해 두었다가, 나중에 다른 곳에서도 실행할 수 있도록 해주는 속성
+ */
+//예제
+func callback(fn: () -> Void) {
+    fn()
+}   //callback: 매개변수 fn를 통해 전달된 클로저를 함수 내부에서 실행
+
+callback {
+    print("Closure has been executed")
+}   //{~}: 클로저
+
+    //func callback(fn: () -> Void) {
+    //    let f = fn //클로저를 상수 f에 대입
+    //    f() //대입된 클로저를 실행
+    //}   //오류: non-escaping 파라미터인 'fn'은 오직 직접 호출하는 것만 가능
+/*:
+ * non-escape(탈출불가)
+    * 함수의 인자값으로 전달된 클로저는 non-escape의 성격을 가진다
+    * 해당 클로저를 함수 내에서 직접 실행을 위해서만 사용해야 한다
+    * 따라서 함수 내부라도 변수(상수)에 대입할 수 없다
+    * 변수(상수)에 대입하면 클로저가 함수 외부에서도 실행할 수 있기 때문이다
+    * 중첩된 내부 함수에도 사용할 수 없다
+    * 컴파일러가 코드를 최적화하는 과정에서의 성능향상 기대
+    * 클로저가 탈출 불가하다 <=> 컴파일러의 메모리 관리가 효율적이다
+    * 탈출불가 클로저 내에서는 self키워드를 사용할 수 있다
+        * 함수가 리턴되기 전에 호출될 것이 명확하기 때문
+ */
+//예제- 함수의 인자값으로 전달된 클로저는 중첩된 내부 함수에도 사용할 수 없다
+    //func callback_2(fn: () -> Void) {
+    //    func innerCallback() {
+    //        fn()
+    //    }
+    //}
+/*:
+ * __@escaping__ 속성
+    * 클로저를 변수(상수)에 대입해야 하는 경우
+    * 클로저를 중첩 함수 내부에서 사용해야 하는 경우
+    * non-escape을 해제
+ */
+//@escaping 속성 적용
+func callback_2(fn: @escaping () -> Void) {
+    let f = fn //클로저를 상수에 할당하는것이 가능해졌다
+    f() //클로저를 할당받은 상수를 실행
+}   //함수타입 앞에 '@escaping'을 넣어준다
+
+callback {
+    print("Closure has been executed")
+}
+//:---
+/*:
+ * __@autoclosure__
+    * 인자값으로 전달된 일반 구문이나 함수 등을 클로저로 wrapping
+    * 인자값을 '{}'형태가 아니라 '()'형태로 사용할 수 있음
+        * 인자값을 직접 클로저 형식으로 넣어줄 필요가 없기 때문
+ */
+//example- @autoclosure 속성을 적용하지 않은 경우
+func condition(stmt: () -> Bool) {
+    //ㄴ함수의 인자값으로 '인자값이 없고 반환값이 Bool형인 클로저'를 받는다
+    if stmt () == true {
+        print("result is true")
+    } else {
+        print("result is false")
+    }
+}   //함수 정의
+
+condition(stmt: {
+    4 > 2
+})  //ㄴ함수 실행- 방법1- 일반 구문
+
+condition{
+    4 > 2
+}   //ㄴ함수 실행- 방법2- 클로저 구문
+    //ㄴ클로저 경량화 문법 사용
+        //클로저 경량화 과정ㄱ
+            // step1: 경량화x, 클로저 전체 구문
+            condition { () -> Bool in
+                return (4 > 2)
+            }
+            // step2: 클로저 타입 선언 생략
+            condition {
+                return (4 > 2)
+            }
+            // step3: 클로저 반환구문 생략
+            condition {
+                4 > 2
+            }
+
+//@autoclosure를 적용한 경우
+func condition_2(stmt: @autoclosure () -> Bool) {
+    if stmt() == true {
+        print("result is true_2")
+    } else {
+        print("result is false_2")
+    }
+}   //ㄴ함수 선언
+
+condition_2(stmt: ( 4 > 2 ))
+    //ㄴ함수 실행
+    //ㄴ@autoclosure 속성의 영향으로 더이상 일반 클로저를 인자값으로 사용할 수 없음
+    //ㄴ트레일링 클로저 구문도 사용 불가
+    //ㄴ클로저가 아니라 그 안에 들어가는 내용만 인자값으로 넣어준다
+    //ㄴ컴파일러가 자동으로 클로저 형태로 감싸서 처리함
+        //<=>인자값을 {}가아닌 ()형태로 사용할 수 있게 해준다
+
+//지연된 실행
+var arrs = [String]() //빈 배열
+
+func addVars(fn: @autoclosure () -> Void) {
+    arrs = Array(repeating: "", count: 3)
+    //ㄴ배열 요소를 3개까지 추가하여 초기화
+    fn()
+    //ㄴ인자값으로 전달된 클로저 실행
+}
+
+    //arrs.insert("KR", at: 1)
+        //ㄴ구문1-오류: 배열이 [1]까지 확장되어있지 않기 때문 (함수가 실행되기 전에는 배열이 초기 빈 배열 그대로)
+    addVars(fn: arrs.insert("KR", at: 1))
+        //ㄴ구문2-오류x: 지연된 실행
