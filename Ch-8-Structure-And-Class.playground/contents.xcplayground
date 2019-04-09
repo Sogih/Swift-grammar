@@ -4,5 +4,6 @@
         <page name='8.0.'/>
         <page name='8.1.구조체와 클래스의 기본 개념'/>
         <page name='8.2.property'/>
+        <page name='8.3.Method'/>
     </pages>
 </playground>
