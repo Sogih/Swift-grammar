@@ -44,15 +44,6 @@ func move(param: SUV) {
 func move(param: Vehicle) {
     param.accelerate()
 }   //인자값으로 받을 수 있는 범위가 더 넓어짐 (accelerate는 최상위클래스 vehicle의 메소드)
-
-var list = [SUV]()
-list.append(SUV())
-
-var list2 = [Vehicle]()
-
-list2.append(Vehicle())
-list2.append(Car())
-list2.append(SUV())
 //:---
 /*:
  * 타입 비교 연산
@@ -61,7 +52,7 @@ list2.append(SUV())
     * 연산자 왼쪽 인스턴스의 타입이 연산자 오른쪽 비교대상 타입과 일치하거나, 하위 클래스일 경우 - true
  */
 //인스턴스 그자체와 클래스 타입을 비교하는 경우
-SUV() is SUV    //인스턴스 is 타입
+SUV() is SUV    //인스턴스 is 타입, 다만 동일 타입을 비교하는 경우 콘솔창에 warning
 SUV() is Car    //최상위클래스 vehicle -> 차상위클래스 car -> 하위클래스 suv
 SUV() is Vehicle
 
@@ -128,13 +119,71 @@ print("\(anySUV2) 캐스팅이 성공하였습니다")
 //:---
 /*:
  * AnyObject
-    * 모든 종류의 클래스 타입을 저장할 수 있는 범용 타입의 클래스
-    * 가장 추상화된 클래스
-    * 가장 상위 클래스
-    * 모든 클래스의 인스턴스는 AnyObject 클래스 타입으로 선언된 변수나 상수에 할당할 수 있음
-    * 모든 클래스의 인스턴스는 AnyObject 타입으로 선언된 함수나 메소드의 인자값으로 사용될 수있음
-    * AnyObject 타입을 반환하는 함수나 메소드는 모든 종류의 클래스를 반환할 수 있음
-    * 고정된 하나의 타입만을 저장할 수 있는 배열이나 딕셔너리, 집합에서도 AnyObject 타입을 사용할 수 있음 (모든 클래스를 저장할 수 있다는 뜻)
-    * 타입 캐스팅을 통해 구체적인 타입으로 변환할 수 있음
-    * 
+    * 가장 추상화된, 가장 상위 클래스
+    * 따라서 AnyObject 타입으로 선언된 변수(상수)에 모든 클래스를 할당할 수 있다
+    * 또한 AnyObject 타입을 인자로 받는(반환 하는) 함수, 메소드는 모든 종류의 클래스를 인자값(반환값)으로 받을 수 있다
  */
+//AnyObject 클래스 타입의 선언과 할당
+var allCar: AnyObject
+    //가장 상위 클래스인 AnyObject 타입으로 변수 allCar를 선언
+    //AnyObject → Vehicle → Car → SUV (상위 → 하위클래스)
+allCar = Car()
+allCar = SUV()
+    //상위 클래스의 타입으로 선언된 변수에 하위 클래스의 인스턴스를 할당
+
+
+//고정된 하나의 타입만을 저장할 수 있는 배열, 딕셔너리, 집합에서도 AnyObject 타입을 사용할 수 있다
+var list = [AnyObject]()
+    //array type으로 AnyObject 지정하여 모든 클래스가 할당될 수 있도록 타입을 선언해 주었다
+list.append(Vehicle())
+list.append(Car())
+list.append(SUV())
+
+
+//AnyObject 타입으로 선언된 값을 타입 캐스팅을 통해 구체적인 타입으로 변환
+let obj: AnyObject = SUV()
+
+if let suv = obj as? SUV {
+        //AnyObject 타입으로 선언된 obj를 SUV 타입으로 다운 캐스팅
+        //옵셔널 캐스팅
+    print("\(suv) 캐스팅이 성공하였습니다4")
+}   //AnyObject 타입으로 선언된 변수(상수)는 다운 캐스팅만 가능하다
+//:---
+/*:
+ * Any
+    * AnyObject와 달리 클래스, 자료형, 구조체, 열거형, 함수까지 모든 타입을 혀용
+    * 즉, 어떤 변수(상수)의 타입이 Any로 선언되었다면 모든 타입의 객체를 저장할 수 있음
+ */
+//Any 객체의 사용
+var value: Any
+    //변수 value에 대해 타입을 Any로 선언
+value = "Sample String"
+value = 3
+value = false
+value = [1,3,5,7,9]
+value = {
+    print("함수가 실행됩니다")
+}   //함수를 포함한 모든 타입을 할당할 수 있다
+
+
+//인자값으로 범용 타입을 받는 함수의 선언과 호출
+func name(_ param: Any) {
+    print("\(param)")
+}
+
+name(3)
+name(false)
+name([1,3,5,7,9])
+name {
+    print(">>>")
+}   //어떤 타입도 인자값으로 사용할 수 있다
+
+
+//배열이나 딕셔너리, 집합에서의 Any
+var rows = [Any]()
+rows.append(3)
+rows.append(false)
+rows.append([1,3,5,7,9])
+rows.append {
+    print(">>>")
+}
