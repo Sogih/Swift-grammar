@@ -61,3 +61,24 @@ d.repeatRun(task: {
 d.repeatRun {
     print("Hello Earth!")
 }   //Trailing closure 문법 사용
+
+
+//mutating : 구조체나 열거형에서 정의된 메소드가 자기 자신의 인스턴스를 수정하거나 프로퍼티를 변경해야 할 때
+    //익스텐션이 구조체나 열거형을 확장의 대상으로 삼았을 때가 이에 해당됨
+extension Int {
+    mutating func square() {
+        self = self * self
+    }   //Int 구조체에 익스텐션을 이용하여 square()메소드 정의
+}
+
+var value = 3
+    //메소드가 인스턴스 자체의 값을 변경하고 있으므로 값을 상수에 할당해서는 안 된다
+value.square()
+//:---
+//익스텐션을 활용한 코드 정리
+import UIKit
+
+public class DataSync {
+    public func save(_ value: Any, forKey: String) { ... }
+    public
+}
