@@ -339,3 +339,4 @@ class FuelPump {
         self.fuelGage -= 1
     }
 }
+
