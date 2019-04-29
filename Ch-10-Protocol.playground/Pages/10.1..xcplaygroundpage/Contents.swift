@@ -298,45 +298,5 @@ ipl.doB()
 /*:
  * Delegation
  */
-//연료의 양에 따라 필요한 알람을 전달하도록 하는 프로토콜과 클래스 구현체
-protocol FuelPumpDelegate {
-    func lackFuel()
-    func fullFuel()
-}
 
-class FuelPump {
-    var maxGage: Double = 100.0
-    var delegate: FuelPumpDelegate? = nil
-    
-    var fuelGage: Double {
-        didSet {
-            if oldValue < 10 {
-                self.delegate?.lackFuel()
-                //연료가 부족하면 델리게이트의 lackFuel 메소드 호출
-            } else if oldValue == self.maxGage {
-                self.delegate?.fullFuel()
-                //연료가 가득차면 델리게이트의 fullFuel 메소드 호출
-            }
-        }
-    }
-    
-    init(fuelGage: Double = 0) {
-        self.fuelGage = fuelGage
-    }
-    
-    //연료펌프 가동
-    func startPump() {
-        while (true) {
-            if (self.fuelGage > 0) {
-                self.jetFuel()
-            } else {
-                break
-            }
-        }
-    }
-    
-    func jetFuel() {
-        self.fuelGage -= 1
-    }
-}
 
