@@ -157,4 +157,4 @@ getPartsDate(date: "2019-05-00", type: "date")
 
 //오류를 던지도록 설계된 함수나 메소드이지만, 필요에 의해 오류를 던지지 않게 하고 싶을 때 - try 대신 try!
 let date = try! parseDate(param: "2015-09-31")
-print("\(date)")
+print("\(date)") 
