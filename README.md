@@ -50,122 +50,122 @@ CHAPTER 02 Xcode와 친해지기 \
 3.4.4 범위 연산자 \
 3.4.5 대입 연산자](ch.3.기본-문법.playground) \
 \
-CHAPTER 04 흐름 제어 구문 코드의 활용성을 높여주는 도구들 \
-4.1 반복문 \
+[CHAPTER 04 흐름 제어 구문 코드의 활용성을 높여주는 도구들](ch.4.흐름-제어-구문.playground) \
+[4.1 반복문 \
 4.1.1 for~in 구문\
 4.1.2 while 구문 \
-4.1.3 repeat~while 구문 \
-4.2 조건문 \
+4.1.3 repeat~while 구문](ch.4.흐름-제어-구문.playground/Pages/4.1.반복문.xcplaygroundpage) \
+[4.2 조건문 \
 4.2.1 if 구문 \
 4.2.2 guard 구문 \
 4.2.3 #available 구문 \
-4.2.4 switch 구문 \
-4.3 제어 전달문 \
+4.2.4 switch 구문](ch.4.흐름-제어-구문.playground/Pages/4.2.조건문.xcplaygroundpage) \
+[4.3 제어 전달문 \
 4.3.1 break \
 4.3.2 continue \
-4.3.3 구문 레이블과 break, continue \
+4.3.3 구문 레이블과 break, continue](ch.4.흐름-제어-구문.playground/Pages/4.3.제어-전달문.xcplaygroundpage) \
 \
-CHAPTER 05 집단 자료형 : 연관된 데이터를 손쉽게 다루기 \
-5.1 배열 \
+[CHAPTER 05 집단 자료형 : 연관된 데이터를 손쉽게 다루기](ch.5.집단-자료형.playground) \
+[5.1 배열 \
 5.1.1 배열 순회 탐색 \
 5.1.2 배열의 동적 선언과 초기화 \
 5.1.3 배열 아이템 동적 추가 \
-5.1.4 범위 연산자를 이용한 인덱스 참조 \
-5.2 집합 \
+5.1.4 범위 연산자를 이용한 인덱스 참조](ch.5.집단-자료형.playground/Pages/5.1.배열(Array).xcplaygroundpage) \
+[5.2 집합 \
 5.2.1 집합의 정의 \
 5.2.2 집합 순회 탐색 \
 5.2.3 집합의 동적 추가와 삭제 \
-5.2.4 집합 연산 \
-5.3 튜플 \
+5.2.4 집합 연산](ch.5.집단-자료형.playground/Pages/5.2.집합(Set).xcplaygroundpage) \
+[5.3 튜플 \
 5.4 딕셔너리 \
 5.4.1 딕셔너리의 선언과 초기화 \
 5.4.2 딕셔너리에 동적으로 아이템 추가하기 \
-5.4.3 딕셔너리의 순회 탐색 \
+5.4.3 딕셔너리의 순회 탐색](ch.5.집단-자료형.playground/Pages/5.3.Tuple.xcplaygroundpage) \
 \
-CHAPTER 06 옵셔널 : 스위프트가 잠재적 오류를 다루는 방법 \
-6.1 옵셔널 타입 선언과 정의 \
-6.2 옵셔널 값 처리 \
+[CHAPTER 06 옵셔널 : 스위프트가 잠재적 오류를 다루는 방법](Ch.6.Optional.playground) \
+[6.1 옵셔널 타입 선언과 정의](Ch.6.Optional.playground/Pages/6.1.optional type 선언과 정의.xcplaygroundpage) \
+[6.2 옵셔널 값 처리 \
 6.2.1 옵셔널 강제 해제 \
 6.2.2 옵셔널 바인딩 \
 6.2.3 컴파일러에 의한 옵셔널 자동 해제 \
-6.2.4 옵셔널의 묵시적 해제 \
+6.2.4 옵셔널의 묵시적 해제](Ch.6.Optional.playground/Pages/6.2. optional value 처리.xcplaygroundpage) \
 \
-CHAPTER 07 함수 : 함수가 갑입니다 \
-7.1 함수의 기본 개념 \
+[CHAPTER 07 함수 : 함수가 갑입니다](Ch.7.Function.playground) \
+[7.1 함수의 기본 개념 \
 7.1.1 사용자 정의 함수 \
 7.1.2 함수의 호출 \
-7.1.3 함수의 반환값과 튜플 \
-7.2 매개변수 \
+7.1.3 함수의 반환값과 튜플](Ch.7.Function.playground/Pages/7.1.함수의-기본-개념.xcplaygroundpage) \
+[7.2 매개변수 \
 7.2.1 내부 매개변수명, 외부 매개변수명 \
 7.2.2 가변 인자 \
 7.2.3 기본값을 갖는 매개변수 \
 7.2.4 매개변수의 수정 \
 7.2.5 InOut 매개변수 \
-7.2.6 변수의 생존 범위와 생명 주기 \
-7.3 일급 객체로서의 함수 \
+7.2.6 변수의 생존 범위와 생명 주기](Ch.7.Function.playground/Pages/7.2.매개변수.xcplaygroundpage) \
+[7.3 일급 객체로서의 함수 \
 7.3.1 일급 함수의 특성 \
-7.3.2 함수의 중첩 \
-7.4 클로저 \
+7.3.2 함수의 중첩](Ch.7.Function.playground/Pages/7.3.First Class Object.xcplaygroundpage) \
+[7.4 클로저 \
 7.4.1 클로저 표현식 \
 7.4.2 클로저 표현식과 경량 문법 \
 7.4.3 트레일링 클로저(Trailing Closure) \
-7.4.4 @escaping과 @autoescape \
+7.4.4 @escaping과 @autoescape](Ch.7.Function.playground/Pages/7.4.Closure.xcplaygroundpage) \
 \
-CHAPTER 08 구조체와 클래스 : 객체지향 스위프트 \
-8.1 구조체와 클래스의 기본 개념\
+[CHAPTER 08 구조체와 클래스 : 객체지향 스위프트](Ch-8-Structure-And-Class.playground/Pages/8.0..xcplaygroundpage) \
+[8.1 구조체와 클래스의 기본 개념\
 8.1.1 정의 구문\
 8.1.2 메소드와 프로퍼티\
 8.1.3 인스턴스 \
 8.1.4 초기화 \
 8.1.5 구조체의 값 전달 방식 : 복사에 의한 전달 \
-8.1.6 클래스의 값 전달 방식 : 참조에 의한 전달 \
-8.2 프로퍼티 \
+8.1.6 클래스의 값 전달 방식 : 참조에 의한 전달](Ch-8-Structure-And-Class.playground/Pages/8.1.구조체와 클래스의 기본 개념.xcplaygroundpage) \
+[8.2 프로퍼티 \
 8.2.1 저장 프로퍼티 \
 8.2.2 연산 프로퍼티 \
 8.2.3 프로퍼티 옵저버 \
-8.2.4 타입 프로퍼티 \
-8.3 메소드 \
+8.2.4 타입 프로퍼티](Ch-8-Structure-And-Class.playground/Pages/8.2.property.xcplaygroundpage) \
+[8.3 메소드 \
 8.3.1 인스턴스 메소드 \
-8.3.2 타입 메소드 \
-8.4 상속 \
+8.3.2 타입 메소드](Ch-8-Structure-And-Class.playground/Pages/8.3.Method.xcplaygroundpage) \
+[8.4 상속 \
 8.4.1 서브클래싱 \
-8.4.2 오버라이딩 \
-8.5 타입 캐스팅 \
+8.4.2 오버라이딩](Ch-8-Structure-And-Class.playground/Pages/8.4.Inheritance.xcplaygroundpage) \
+[8.5 타입 캐스팅 \
 8.5.1 타입 비교 연산\
 8.5.2 타입 캐스팅 연산\
-8.5.3 Any, AnyObject \
-8.6 초기화 구문\
+8.5.3 Any, AnyObject](Ch-8-Structure-And-Class.playground/Pages/8.5.Type casting.xcplaygroundpage) \
+[8.6 초기화 구문\
 8.6.1 init 초기화 메소드\
-8.6.2 초기화 구문의 오버라이딩\
-8.7 옵셔널 체인 \
+8.6.2 초기화 구문의 오버라이딩](Ch-8-Structure-And-Class.playground/Pages/8.6.초기화 구문.xcplaygroundpage)\
+[8.7 옵셔널 체인 \
 8.7.1 옵셔널 타입의 문제점\
-8.7.2 옵셔널 체인 \
+8.7.2 옵셔널 체인](Ch-8-Structure-And-Class.playground/Pages/8.7.Optional Chain.xcplaygroundpage) \
 \
-CHAPTER 09 열거형과 익스텐션 : 코드의 한계를 넓혀주는 문법\
-9.1 열거형 \
+[CHAPTER 09 열거형과 익스텐션 : 코드의 한계를 넓혀주는 문법](Ch-9-Enumeration-And-Extensions.playground)\
+[9.1 열거형 \
 9.1.1 열거형의 정의\
 9.1.2 멤버와 값의 분리 \
-9.1.3 열거형의 활용 \
-9.2 익스텐션 \
+9.1.3 열거형의 활용](Ch-9-Enumeration-And-Extensions.playground/Pages/9.1.Enumeration.xcplaygroundpage) \
+[9.2 익스텐션 \
 9.2.1 익스텐션과 연산 프로퍼티 \
 9.2.2 익스텐션과 메소드 \
-9.2.3 익스텐션을 활용한 코드 정리 \
+9.2.3 익스텐션을 활용한 코드 정리](Ch-9-Enumeration-And-Extensions.playground/Pages/9.2.Extensions.xcplaygroundpage) \
 \
-CHAPTER 10 프로토콜 : 객체의 설계도\
-10.1 프로토콜의 정의 \
+[CHAPTER 10 프로토콜 : 객체의 설계도](Ch-10-Protocol.playground)\
+[10.1 프로토콜의 정의 \
 10.1.1 프로토콜 프로퍼티\
 10.1.2 프로토콜 메소드 \
-10.1.3 프로토콜과 초기화 메소드 \
+10.1.3 프로토콜과 초기화 메소드](Ch-10-Protocol.playground/Pages/10.1..xcplaygroundpage) \
 10.2 타입으로서의 프로토콜 \
-10.3 델리게이션 \
-10.4 프로토콜의 활용\
+[10.3 델리게이션](Ch-10-Protocol.playground/Pages/10.3.delegation.xcplaygroundpage) \
+[10.4 프로토콜의 활용\
 10.4.1 확장 구문과 프로토콜\
 10.4.2 프로토콜의 상속\
 10.4.3 클래스 전용 프로토콜\
-10.4.4 optional \
+10.4.4 optional](Ch-10-Protocol.playground/Pages/10.4.프로토콜의 활용.xcplaygroundpage) \
 \
-CHAPTER 11 오류 처리 : 스위프트는 어떻게 오류를 처리할까요? \
-11.1 오류 처리 구문 \
+[CHAPTER 11 오류 처리 : 스위프트는 어떻게 오류를 처리할까요?](Ch-11-오류처리.playground/Pages/11..xcplaygroundpage) \
+[11.1 오류 처리 구문 \
 11.1.1 오류 타입 정의하기\
 11.1.2 오류 던지기 \
-11.1.3 오류 객체 잡아내기\
+11.1.3 오류 객체 잡아내기](Ch-11-오류처리.playground/Pages/11.1.오류 처리 구문.xcplaygroundpage)\
