@@ -2,12 +2,12 @@
 <playground version='6.0' target-platform='ios' display-mode='rendered'>
     <pages>
         <page name='8.0.'/>
-        <page name='8.1.구조체와 클래스의 기본 개념'/>
+        <page name='8.1.구조체와-클래스의-기본-개념'/>
         <page name='8.2.property'/>
         <page name='8.3.Method'/>
         <page name='8.4.Inheritance'/>
-        <page name='8.5.Type casting'/>
-        <page name='8.6.초기화 구문'/>
-        <page name='8.7.Optional Chain'/>
+        <page name='8.5.Type-casting'/>
+        <page name='8.6.초기화-구문'/>
+        <page name='8.7.Optional-Chain'/>
     </pages>
 </playground>
