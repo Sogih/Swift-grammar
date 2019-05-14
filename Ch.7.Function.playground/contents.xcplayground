@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' display-mode='rendered'>
+    <pages>
+        <page name='7.1.함수의-기본-개념'/>
+        <page name='7.2.매개변수'/>
+        <page name='7.3.First-Class-Object'/>
+        <page name='7.4.Closure'/>
+    </pages>
+</playground>
